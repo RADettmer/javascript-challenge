@@ -27,7 +27,6 @@ var theParent = document.querySelector("#filter-btn");
 theParent.addEventListener("click", runEnter, false);
 */
 
-
 /* - do not run -
 theParent.addEventListener("click", doSomething, false);
 
@@ -39,7 +38,6 @@ function doSomething(e) {
     e.stopPropagation();
 }
 */
-
 
 // create event handlers //
 button.on("click", runEnter, false);
@@ -54,17 +52,28 @@ function runEnter() {
     // clear any prior data in table
     tbody.html("");
 
+    //test to accpet all values
+/*    var datetime = d3.select("#datetime");
+    var city = d3.select("#city");
+    var state = d3.select("#state");
+    var shape = d3.select("#shape");
+
+    //filter data
+
+*/
     // test for empty value
-    if (d3.select("#datetime") !=="") {
+   if (d3.select("#datetime").length !==0) {
         var inputElement = d3.select("#datetime");
+        //console.log(inputElement);
         var inputValue = inputElement.property("value");
         console.log(inputValue);
         // filter data on input element
         var filteredData = tableData.filter(data => data.datetime === inputValue);
         console.log(filteredData);
     } 
-    else if (d3.select("#city") !=="") {
+    else if (d3.select("#city").length !==0) {
         var inputElement = d3.select("#city");
+        console.log(inputElement);
         var inputValue = inputElement.property("value");
         console.log(inputValue);
         // filter data on input element
@@ -73,6 +82,7 @@ function runEnter() {
     } 
     else if (d3.select("#state") !=="") {
         var inputElement = d3.select("#state");
+        console.log(inputElement);
         var inputValue = inputElement.property("value");
         console.log(inputValue);
         // filter data on input element
