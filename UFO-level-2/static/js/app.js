@@ -16,32 +16,25 @@ data.forEach(function(tableData) {
 });
 
 // select the button //
-var button = d3.selectAll("#filter-btn");
+var button = d3.select("#filter-btn");
+var clearbutton = d3.select("#clear-btn");
 
 // select the form //
-var form = d3.selectAll("#form");
+var form = d3.select("#form");
 
-//test test
-/*
-var theParent = document.querySelector("#filter-btn");
-theParent.addEventListener("click", runEnter, false);
-*/
-
-/* - do not run -
-theParent.addEventListener("click", doSomething, false);
-
-function doSomething(e) {
-    if (e.target !== e.currentTarget){
-        var clickedItem = e.target.id;
-        alert("Hello" + clickedItem);
-    }
-    e.stopPropagation();
-}
-*/
 
 // create event handlers //
 button.on("click", runEnter, false);
 form.on("submit", runEnter, false);
+clearbutton.on("click", runClear, false);
+
+//test to accept all values - test outside function
+var datetime = d3.select("#datetime");
+var city = d3.select("#city");
+//console.log(city);
+var state = d3.select("#state");
+//var shape = d3.select("#shape");
+
 
 // complete the event handler function for the form //
 function runEnter() {
@@ -52,17 +45,16 @@ function runEnter() {
     // clear any prior data in table
     tbody.html("");
 
-    //test to accpet all values
-/*    var datetime = d3.select("#datetime");
-    var city = d3.select("#city");
-    var state = d3.select("#state");
-    var shape = d3.select("#shape");
+    //test to accept all values - test inside function
+    //var datetime = d3.select("#datetime");
+    //var city = d3.select("#city");
+    console.log(city);
+    //var state = d3.select("#state");
+    //var shape = d3.select("#shape");
 
-    //filter data
 
-*/
-    // test for empty value
-   if (d3.select("#datetime").length !==0) {
+    // test for empty value - this.value????
+   if (datetime.length != 0) {
         var inputElement = d3.select("#datetime");
         //console.log(inputElement);
         var inputValue = inputElement.property("value");
@@ -70,8 +62,7 @@ function runEnter() {
         // filter data on input element
         var filteredData = tableData.filter(data => data.datetime === inputValue);
         console.log(filteredData);
-    } 
-    else if (d3.select("#city").length !==0) {
+    } else if (city.length != 0) {
         var inputElement = d3.select("#city");
         console.log(inputElement);
         var inputValue = inputElement.property("value");
@@ -79,8 +70,7 @@ function runEnter() {
         // filter data on input element
         var filteredData = tableData.filter(data => data.city === inputValue);
         console.log(filteredData);
-    } 
-    else if (d3.select("#state") !=="") {
+    } else if (state.length != 0) {
         var inputElement = d3.select("#state");
         console.log(inputElement);
         var inputValue = inputElement.property("value");
@@ -88,8 +78,7 @@ function runEnter() {
         // filter data on input element
         var filteredData = tableData.filter(data => data.state === inputValue);
         console.log(filteredData);       
-    } 
-    else {
+    } else {
         var inputElement = d3.select("#shape");
         var inputValue = inputElement.property("value");
         console.log(inputValue);
@@ -110,3 +99,11 @@ function runEnter() {
     });
 };
 
+function runClear() {
+    let inputs = d3.selectAll(".form-control");
+  // prevent page from refreshing
+  d3.event.preventDefault();
+
+  // clear any prior data in table
+  inputs.html("");
+}
